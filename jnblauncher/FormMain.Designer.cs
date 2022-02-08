@@ -178,7 +178,7 @@ namespace jnblauncher
             this.Name = "FormMain";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Jump\'n\'bump launcher";
+            this.Text = "Jump \'n Bump game launcher";
             this.Shown += new System.EventHandler(this.FormMain_Shown);
             this.groupBoxMap.ResumeLayout(false);
             this.ResumeLayout(false);

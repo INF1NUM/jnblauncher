@@ -19,8 +19,8 @@ namespace jnblauncher
             InitializeComponent();
         }
 
-        private string mapsDirectory = Application.StartupPath + "\\data";
-        private string jnbExePath = Application.StartupPath + "\\jumpnbump.exe";
+        private string mapsDirectory = $"{Application.StartupPath}\\data";
+        private string jnbExePath = $"{Application.StartupPath}\\jumpnbump.exe";
         private List<Map> maps;
 
         private void FormMain_Shown(object sender, EventArgs e)
@@ -35,7 +35,7 @@ namespace jnblauncher
 
             if(mapsArray.Length == 0)
             {
-                MessageBox.Show("Maps directory is empty: " + mapsDirectory, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show($"Maps directory is empty: {mapsDirectory}", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 Environment.Exit(0);
             }
 
@@ -75,8 +75,20 @@ namespace jnblauncher
             if(checkBoxNoFlies.Checked)
                 jnb.StartInfo.Arguments += " -noflies";
 
-            if (jnb.Start() == true)
-                Environment.Exit(0);
+            try
+            {
+                if (jnb.Start() == true)
+                    Environment.Exit(0);
+            }
+            catch (Win32Exception ex)
+            {
+                if(!ex.NativeErrorCode.Equals(1223))
+                    MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void checkBoxLoadMap_CheckedChanged(object sender, EventArgs e)
