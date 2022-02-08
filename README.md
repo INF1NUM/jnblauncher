@@ -1,2 +1,1 @@
-# jnblauncher
-# Jump'n'bump game launcher
+# Jump 'n Bump game launcher
